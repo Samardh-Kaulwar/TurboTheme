@@ -1,0 +1,18 @@
+.price, .current_price, .modal_price {
+display: none !important;
+}
+
+#add-to-cart, .add_to_cart {
+display: none !important;
+}
+.purchase-details__quantity, .product-quantity-box, .purchase-details{
+  display: none !important;
+}
+
+.js-recently-viewed,.recently-viewed__section, .search-input-bar, .search-bar-btn{
+    display: none !important;
+
+}
+.disclosure__toggle, .disclosure__toggle--currency, .product-charity-upsell {
+display: none !important
+}

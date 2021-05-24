@@ -1,0 +1,57 @@
+<a href='{{ collections[section.settings.banner_link].url }}'><div class='banner-desktop'></div></a>
+
+<script>
+  $(document).ready(function(){
+    
+    if($(window).width() < 767)
+    {
+      var src ="{{ section.settings.mobile_banner | img_url:'original' }}";
+      
+    }
+    else
+    {
+      var src ="{{ section.settings.desktop_banner | img_url:'original' }}";
+      
+    }
+    $(".banner-desktop").html("<img src="+src+" class='banner-image' />");
+    
+  
+  });
+  
+</script>
+
+{% schema %}
+  {
+    "name": "Banner",
+    "class":"shopify-section--banner",
+    "settings": [
+{
+ "type":"collection",
+"id":"banner_link",
+"label":"Link"
+},
+{
+  "type":"image_picker",
+   "id":"desktop_banner",
+"label":"Desktop Banner"
+},
+{
+  "type":"image_picker",
+   "id":"mobile_banner",
+"label":"Mobile Banner"
+}
+],
+"presets":[
+{
+ "name":"Banner",
+"category":"Desktop"
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,105 @@
+<input type='hidden' name="properties[Service Added For]" value='{{ product.title | escape }}' />
+{%if product.tags contains 'Saree' %}
+<ul class='product-addon-upsell'>
+  <li><b> Add-on Services:</b>(For Measurement,We'll Contact You After Order.)</li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37870918566037' /> <span>Blouse Stitching</span> 
+    <b>(<span class="money" data-currency-original="Rs. 1500.00" data-currency-inr="Rs. 1500.00" data-currency="INR">Rs. 1500.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37870933704853' /> Petticoat (Satin) <span></span>
+    <b>(<span class="money" data-currency-original="Rs. 650.00" data-currency-inr="Rs. 650.00" data-currency="INR">Rs. 650.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37870920433813' /> <span>Fall & Pico</span>
+    <b>(<span class="money" data-currency-original="Rs. 350.00" data-currency-inr="Rs. 350.00" data-currency="INR">Rs. 350.00</span>)</b>
+
+  </li>
+</ul>
+
+{%endif%}
+
+{%if product.tags contains 'Suit' %}
+<ul class='product-addon-upsell'>
+  <li><b> Add-on Services:</b>(For Measurement,We'll Contact You After Order.)</li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37873000710293' /> <span>Suit Stitching</span> 
+    <b>(<span class="money" data-currency-original="Rs. 1800.00" data-currency-inr="Rs. 1800.00" data-currency="INR">Rs. 1800.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37873009131669' /> <span>Kurti Stitching</span>
+    <b>(<span class="money" data-currency-original="Rs. 1200.00" data-currency-inr="Rs. 1200.00" data-currency="INR">Rs. 1200.00</span>)</b>
+
+  </li>
+
+</ul>
+
+{%endif%}
+
+{%if product.tags contains 'Lehengas' or product.tags contains 'Lehenga' %}
+<ul class='product-addon-upsell'>
+  <li><b> Add-on Services:</b>(For Measurement, We'll Contact You After Order.)</li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37873111400597' /> <span>Lehenga Stitching	</span> 
+    <b>(<span class="money" data-currency-original="Rs. 4500.00" data-currency-inr="Rs. 4500.00" data-currency="INR">Rs. 4500.00</span>)</b>
+
+  </li>
+
+
+</ul>
+
+{%endif%}
+
+{%if product.tags contains 'Fabric' %}
+<ul class='product-addon-upsell'>
+  <li><b> Add-on Services:</b></li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37871832105109' /> <span>Blouse Stitching</span> 
+    <b>(<span class="money" data-currency-original="Rs. 1500.00" data-currency-inr="Rs. 1500.00" data-currency="INR">Rs. 1500.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37871842394261' /> <span>Suit Stitching</span>
+    <b>(<span class="money" data-currency-original="Rs. 1800.00" data-currency-inr="Rs. 1800.00" data-currency="INR">Rs. 1800.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37871905013909' /> <span>Kurta Stitching</span>
+    <b>(<span class="money" data-currency-original="Rs. 1200.00" data-currency-inr="Rs. 1200.00" data-currency="INR">Rs. 1200.00</span>)</b>
+
+  </li>
+  <li>
+    <input type='checkbox' class='addon-checkbox' name='id[]' value='37871911272597' /> <span>Lehenga Stitching</span>
+    <b>(<span class="money" data-currency-original="Rs. 4500.00" data-currency-inr="Rs. 4500.00" data-currency="INR">Rs. 4500.00</span>)</b>
+
+  </li>
+
+</ul>
+
+{%endif%}
+<ul class='product-charity-upsell'><li><input type='checkbox' id='donation-money' value='37901292830869' /> Charity To Weaver (<span class="money" data-currency-original="Rs. 100.00" data-currency-inr="Rs. 100.00" data-currency="INR">Rs. 100.00</span>) </li></ul>
+      
+<script>
+  $(document).ready(function(){
+    $("input#donation-money").click(function(){
+      if($(this).is(":checked"))
+      {
+        var id = $(this).val();
+        $.post("/cart/add.js",
+               {
+          id:id,
+          quantity:1
+        }
+);
+      }
+     
+    
+    });
+  
+  }); 
+  
+</script>
+

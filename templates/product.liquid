@@ -1,0 +1,52 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+<section class="section has-padding-top">
+  <a name="pagecontent" id="pagecontent"></a>
+  <div class="container">
+
+    {% render 'product__structured-data' %}
+
+    <div class="breadcrumb__wrapper one-whole column">
+      <div class="breadcrumb-collection breadcrumb-collection--product">
+        {% if collection.previous_product or collection.next_product %}
+          <div class="nav_arrows breadcrumb_text">
+            {% if collection.previous_product %}
+              <a href="{{ collection.previous_product }}" title="{{ 'products.general.previous_product_html' | t }}" class="breadcrumb_link"><span class="icon-left-arrow"> {{ 'products.general.previous_product_html' | t }}</span></a>
+            {% endif %}
+            {% if collection.previous_product and collection.next_product %}<span class="breadcrumb-divider"> | </span>{% endif %}
+
+            {% if collection.next_product %}
+              <a href="{{collection.next_product}}" title="{{ 'products.general.next_product_html' | t }}" class="breadcrumb_link">{{ 'products.general.next_product_html' | t }} <span class="icon-right-arrow"></span></a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% render 'product__breadcrumb' %}
+      </div>
+    </div>
+
+    <section class="section--has-sidebar-option is-flex is-flex-wrap has-padding-top">
+      {% section 'product-sidebar' %}
+      {% section 'product-template' %}
+      {% section 'product-recommendations' %}
+    </section>
+  </div>
+</section>
+
+
+<script>
+  $("body").ready(function(){
+   $("input#quantity").bind("change paste keyup", function() {
+   
+    var count = $("input#quantity").val();
+      var url ='{{ shop.url }}/cart/{{ product.variants.first.id }}:'+count;
+      $("a.psd-btn").attr('href',url);
+  });
+  });
+  
+  
+</script>
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&amp;','%26'}}" data-description="{{ product.description | escape }}" data-price="{{ variant.price | money_without_currency }}" data-currency="{{ shop.currency }}"></div>

@@ -1,0 +1,53 @@
+<!--<ul id='donation-box' class='product-addon-upsell'>
+  <li class='click-contribution-box' ><b> Charity To Weaver: <span class='box-click'>Click Me</span></b></li>
+  <li class='open-contribution-box'>
+    <label>Minimum Donation: Rs.100</label> 
+    <input type='Number' id='donation-box-price' min='100'  class='addon-checkbox' placeholder='Enter Donation Amount' data-vendor="{{ product.vendor }}" /> 
+
+    <button class='donation-btn'>Contribution</button>
+
+  </li>
+</ul>-->
+
+<script>
+  $("button.donation-btn").click(function(e){
+    e.preventDefault();
+    var q = $("#donation-box-price").val();
+    q=parseInt(q);
+    var weaver = $("#donation-box-price").attr('data-vendor');
+    if(q  && q > 99)
+    {
+      jQuery.post('/cart/add.js',
+
+                  {
+        items: [
+          {
+            quantity: q,
+            id: 37901292830869,
+            properties: {
+              'Weaver': weaver
+            }
+          }
+
+        ]
+      },
+                  function(){
+        $("#donation-box").html("<li class='support-message'>Thanks For Your Support</li>");
+      }
+                 ); 
+    }
+    else
+    {
+      $("#donation-box-price").after("<span class='error'>Invalid Amount. </span>");
+    }
+
+  });
+  $(".click-contribution-box").click(function(){
+    $(".open-contribution-box").slideToggle(233);
+  });
+  $("ul.product-addon-upsell > li > span").click(function(){
+    $(this).prev().trigger('click');
+
+  });  
+</script>
+

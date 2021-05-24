@@ -1,0 +1,24 @@
+<iframe style='display:none;' id='homevideo'  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<script>
+  $(document).ready(function(){
+  $("#homevideo").attr("src","https://www.youtube.com/embed/8_YBKNMaDAU").show();
+  
+  });  
+</script>
+{% schema %}
+  {
+    "name": "video",
+    "settings": [],
+"presets": [{
+"name": "Video",
+"category": "Home"
+
+}]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,24 @@
+{%- if request.page_type == 'product' -%}
+  {%- assign ratingStructured = product.metafields.avada -%}
+    {%- if ratingStructured.ratingValue -%}
+    <!-- Added by AVADA Photo Reviews -->
+        <script type="application/ld+json">
+{
+"@context": "https://schema.org/",
+"@type": "AggregateRating",
+"@id": {{ canonical_url | json }},
+"itemReviewed": {
+        "@type": "Product",
+        "image": [{% for image in product.images %}
+          "https:{{ image | img_url: 'master' }}"{%- if forloop.last == false -%},{%- endif -%}
+          {% endfor %}
+        ],
+        "name": "{{ product.title | strip_html | strip_newlines | strip | escape }}"
+      },
+      "ratingValue": {{ ratingStructured.ratingValue }},
+      "ratingCount": {{ ratingStructured.ratingCount }}
+}
+</script>
+<!-- Added by AVADA Photo Reviews -->
+{%- endif -%}
+{%- endif -%}
