@@ -1,3 +1,19 @@
+// Hello.
+//
+// This is JSHint, a tool that helps to detect errors and potential
+// problems in your JavaScript code.
+//
+// To start, simply enter some JavaScript anywhere on this page. Your
+// report will appear on the right side.
+//
+// Additionally, you can toggle specific options in the Configure
+// menu.
+
+function main() {
+  return 'Hello, World!';
+}
+
+main();
 /* ==================================================
 #Featured collection
 #Featured promotions
@@ -376,11 +392,11 @@ var videoSection = {
         var playerID;
 
         if (player.isYouTube || player.isVimeo) {
-          var videoID = $videoWrapper.attr('id');
-          var playerID = $(player.elements.original).attr('id');
+           videoID = $videoWrapper.attr('id');
+           playerID = $(player.elements.original).attr('id');
         } else if (player.isHTML5) {
-          var videoID = $videoWrapper.find('[data-plyr-video-id]').data('plyr-video-id');
-          var playerID = player.id;
+           videoID = $videoWrapper.find('[data-plyr-video-id]').data('plyr-video-id');
+           playerID = player.id;
           $videoElement = $section.find('.plyr--video');
         }
 
@@ -575,6 +591,9 @@ selectCallback = function(variant, selector) {
   var notifySend = Shopify.translation.notify_email_send;
 
   var notifyUrl = $notifyFormInputs.data('url');
+  var notifyMessage;
+  var notifyEmailInput;
+  var variantTitle;
 
   // Manually trigger change event so
   // pure JS listeners can receive it
@@ -584,19 +603,19 @@ selectCallback = function(variant, selector) {
   if (variant) {
     if (variant.title != null) {
     // Escape variant titles
-      var variantTitle = variant.title.replace(/"/g,'\&quot;');
+       variantTitle = variant.title.replace(/"/g,'\&quot;');
 
-      var notifyMessage = Shopify.translation.notify_message_first + variantTitle + Shopify.translation.notify_message_last + notifyUrl;
+       notifyMessage = Shopify.translation.notify_message_first + variantTitle + Shopify.translation.notify_message_last + notifyUrl;
     }
   } else {
-    var notifyMessage = Shopify.translation.notify_message_first + Shopify.translation.notify_message_last + notifyUrl;
+      notifyMessage = Shopify.translation.notify_message_first + Shopify.translation.notify_message_last + notifyUrl;
   }
 
   if ($notifyFormInputs.hasClass('customer--true')) {
     var notifyCustomerEmail = "";
-    var notifyEmailInput = '<input type="hidden" class="notify_email" name="contact[email]" id="contact[email]" value="'+ notifyCustomerEmail +'" />'
+    notifyEmailInput = '<input type="hidden" class="notify_email" name="contact[email]" id="contact[email]" value="'+ notifyCustomerEmail +'" />'
   } else {
-    var notifyEmailInput = '<input required type="email" class="notify_email" name="contact[email]" id="contact[email]" placeholder="'+ notifyEmail +'" value="'+ notifyEmailValue +'" />';
+     notifyEmailInput = '<input required type="email" class="notify_email" name="contact[email]" id="contact[email]" placeholder="'+ notifyEmail +'" value="'+ notifyEmailValue +'" />';
   }
   var notifyFormHTML = notifyEmailInput+'<input type="hidden" name="challenge" value="false" /><input type="hidden" name="contact[body]" class="notify_form_message" data-body="'+ notifyMessage +'" value="'+ notifyMessage +'" /><input class="global-button global-button--primary" type="submit" value="'+ notifySend + '" style="margin-bottom:0px" />';
 
