@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /* eslint-disable */
 //document ready
 $(function() {
@@ -556,6 +557,7 @@ $(function() {
     var productHasSale = false;
     var productCompareAtPrice = 0;
     var productFinalPrice = 0;
+    
 
     $cart_form.data('total-discount', cart.total_discount);
 
@@ -576,7 +578,7 @@ $(function() {
         var discountMessage = "";
 
         for (i=0; i < itemDiscounts.length; i++) {
-          var amount = Shopify.formatMoney(itemDiscounts[i].amount, $('body').data('money-format'));
+       
           var title = itemDiscounts[i].title;
           discountMessage = '<p class="notification-discount meta">' + title + '</p>';
         }
@@ -614,7 +616,7 @@ $(function() {
               if (itemVariants.length > 1) {
                 for (v = 0; v < itemVariants.length; v++) {
                   if (itemVariants[v].id == item.id) {
-                    var data = itemVariants[v];
+                     data = itemVariants[v];
                   }
                 }
               }
@@ -635,6 +637,7 @@ $(function() {
         });
 
         if(productHasSale == true) {
+           
           //puts the slash through the old item price
           var itemPrice = Shopify.formatMoney(productFinalPrice, $('body').data('money-format')) + ' </span><span class="money was_price">' + Shopify.formatMoney(productCompareAtPrice, $('body').data('money-format')) + '</span>';
           cart_items_html += '<span class="money sale">' + itemPrice + '</strong>';
@@ -643,12 +646,14 @@ $(function() {
           saving = (productCompareAtPrice - productFinalPrice) * item.quantity;
           total_saving = saving + total_saving;
         } else {
+           var itemPrice;
+          
           if (item.price > item.final_price) {
             //puts the slash through the old item price
-            var itemPrice = Shopify.formatMoney(item.final_price, $('body').data('money-format')) + ' </span><span class="money was_price">' + Shopify.formatMoney(item.price, $('body').data('money-format')) + '</span>';
+             itemPrice = Shopify.formatMoney(item.final_price, $('body').data('money-format')) + ' </span><span class="money was_price">' + Shopify.formatMoney(item.price, $('body').data('money-format')) + '</span>';
             cart_items_html += '<span class="money sale">' + itemPrice + '</strong>';
           } else {
-            var itemPrice = Shopify.formatMoney(item.price, $('body').data('money-format'));
+             itemPrice = Shopify.formatMoney(item.price, $('body').data('money-format'));
             cart_items_html += '<span class="money">' + itemPrice + '</span></strong>';
           }
         }
@@ -667,7 +672,7 @@ $(function() {
       });
 
       var cartDiscounts = cart.cart_level_discount_applications;
-      var cartDiscountMessage = "";
+ 
 
       for (i=0; i < cartDiscounts.length; i++) {
         var amount = Shopify.formatMoney(cartDiscounts[i].total_allocated_amount, $('body').data('money-format'));
@@ -824,20 +829,22 @@ $(function() {
   Swatch options - second and third swatch 'sold-out' will update based on availability of previous options selected
 ==============================================================================*/
 Shopify.updateOptionsInSelector = function(selectorIndex, parent) {
+  var key;
+  var selector;
 
   switch (selectorIndex) {
     case 0:
-      var key = 'root';
-      var selector = $(parent + ' .single-option-selector:eq(0)');
+      key = 'root';
+      selector = $(parent + ' .single-option-selector:eq(0)');
       break;
     case 1:
-      var key = $(parent + ' .single-option-selector:eq(0)').val();
-      var selector = $(parent + ' .single-option-selector:eq(1)');
+       key = $(parent + ' .single-option-selector:eq(0)').val();
+       selector = $(parent + ' .single-option-selector:eq(1)');
       break;
     case 2:
-      var key = $(parent + ' .single-option-selector:eq(0)').val();
+      key = $(parent + ' .single-option-selector:eq(0)').val();
       key += ' / ' + $(parent + ' .single-option-selector:eq(1)').val();
-      var selector = $(parent + ' .single-option-selector:eq(2)');
+      selector = $(parent + ' .single-option-selector:eq(2)');
   }
 
   var availableOptions = Shopify.optionsMap[key];
@@ -853,25 +860,26 @@ Shopify.updateOptionsInSelector = function(selectorIndex, parent) {
 };
 
 Shopify.linkOptionSelectors = function(product, parent) {
+  var key;
     // Building our mapping object.
     Shopify.optionsMap = {};
     for (var i=0; i<product.variants.length; i++) {
       var variant = product.variants[i];
       if (variant.available) {
         // Gathering values for the 1st drop-down.
-        Shopify.optionsMap['root'] = Shopify.optionsMap['root'] || [];
-        Shopify.optionsMap['root'].push(variant.option1);
-        Shopify.optionsMap['root'] = Shopify.uniq(Shopify.optionsMap['root']);
+        Shopify.optionsMap.root = Shopify.optionsMap.root || [];
+        Shopify.optionsMap.root.push(variant.option1);
+        Shopify.optionsMap.root = Shopify.uniq(Shopify.optionsMap.root);
         // Gathering values for the 2nd drop-down.
         if (product.options.length > 1) {
-          var key = variant.option1;
+          key = variant.option1;
           Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
           Shopify.optionsMap[key].push(variant.option2);
           Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
         }
         // Gathering values for the 3rd drop-down.
         if (product.options.length === 3) {
-          var key = variant.option1 + ' / ' + variant.option2;
+          key = variant.option1 + ' / ' + variant.option2;
           Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
           Shopify.optionsMap[key].push(variant.option3);
           Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
@@ -907,7 +915,7 @@ function htmlEncode(value){
 //Check if device is touch-enabled
 function is_touch_device() {
   return 'ontouchstart' in window || navigator.maxTouchPoints;
-};
+}
 
 //Differentiate between mobile and touch screen laptops
 var touch_device = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
