@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /* ==================================================
 #Featured collection
 #Featured promotions
@@ -46,7 +47,7 @@ var featuredCollectionSection = {
             name: 'model-viewer-ui',
             version: '1.0',
           }
-        ], productMedia.setupMedia)
+        ], productMedia.setupMedia);
       }
 
       if (products_per_slide == "2" && products_available > products_per_slide && products_limit > products_per_slide || products_per_slide == "4" && products_available > products_per_slide && products_limit > products_per_slide || products_per_slide == "6" && products_available > products_per_slide && products_limit > products_per_slide){
@@ -108,7 +109,7 @@ var featuredCollectionSection = {
       $slider.flickity('destroy');
     }
   }
-}
+};
 
 /*============================================================================
   Featured promotions
@@ -133,7 +134,7 @@ var featuredPromotions = {
       }, { offset: '80%' });
     });
   }
-}
+};
 
 /*============================================================================
   Slideshow
@@ -148,7 +149,7 @@ var slideshow = {
         slideshowSpeed: $homepageSlider.data('slideshow-speed')*1000,
         slideshowTextAnimation: $homepageSlider.data('slideshow-text-animation'),
         adaptiveHeight: $homepageSlider.data('adaptive-height')
-      }
+      };
 
       //initiate the slideshow
       if (!$homepageSlider.hasClass('flickity-enabled')){
@@ -197,7 +198,7 @@ var slideshow = {
     $slider.flickity('destroy');
 
   }
-}
+};
 
 /*============================================================================
   Testimonials
@@ -212,7 +213,7 @@ var testimonial = {
         slideshowSpeed: $testimonialSlider.data('slideshow-speed')*1000,
         slideshowTextAnimation: $testimonialSlider.data('slideshow-text-animation'),
         adaptiveHeight: $testimonialSlider.data('adaptive-height')
-      }
+      };
 
       if( $('.testimonial-image').length > 0){
         $('.testimonial-block').each(function(){
@@ -220,7 +221,7 @@ var testimonial = {
             var theBlock = $(this).closest('.testimonial-block');
             $(theBlock).addClass('set-testimonial-height');
           }
-        })
+        });
       }
 
       //initiate the slideshow
@@ -270,7 +271,7 @@ var testimonial = {
     $slider.flickity('destroy');
 
   }
-}
+};
 
 /*============================================================================
   Gallery
@@ -299,11 +300,11 @@ var gallery = {
     $('[rel=gallery]').fancybox({
       baseClass: "gallery-section__lightbox",
       clickContent: "nextOrClose"
-    })
+    });
   }
 
   }
-}
+};
 
 /*============================================================================
   Video
@@ -343,14 +344,14 @@ var videoSection = {
           if (instance.id != player.id) {
             player.pause();
           }
-        })
-      })
+        });
+      });
 
       // Moves players from video section into global array
       if (globalVideoPlayers) {
         globalVideoPlayers.push(player);
       }
-    })
+    });
 
     $('[data-video-element]').each(function(index, video) {
 
@@ -376,11 +377,11 @@ var videoSection = {
         var playerID;
 
         if (player.isYouTube || player.isVimeo) {
-          var videoID = $videoWrapper.attr('id');
-          var playerID = $(player.elements.original).attr('id');
+           videoID = $videoWrapper.attr('id');
+           playerID = $(player.elements.original).attr('id');
         } else if (player.isHTML5) {
-          var videoID = $videoWrapper.find('[data-plyr-video-id]').data('plyr-video-id');
-          var playerID = player.id;
+           videoID = $videoWrapper.find('[data-plyr-video-id]').data('plyr-video-id');
+           playerID = player.id;
           $videoElement = $section.find('.plyr--video');
         }
 
@@ -403,17 +404,17 @@ var videoSection = {
               $videoElement.show();
 
               // If display text over video unchecked
-              if ($videoTextContainer.hasClass('display-text-over-video--false')) {
-                $videoText.hide();
-              } else {
-                $videoText.show();
-              }
-
+              if ($videoTextContainer.hasClass('display-text-over-video--false'))  $videoText.hide();
+                
+               else $videoText.show();
+                
+      
               // Keep play button hidden
               $playButton.hide();
 
               // HTML5 Mobile Video
-            } else if (Shopify.media_queries.medium.matches && player.isHTML5) {
+            }
+            else if (Shopify.media_queries.medium.matches && player.isHTML5) {
 
               // Hide image
               $image.hide();
@@ -430,16 +431,16 @@ var videoSection = {
 
                 // Hide play button
                 $playButton.hide();
-              })
+              });
             }
           } else { // If Autoplay disabled
             // If poster image, show image wrapper otherwise hide it
             if ($posterImage) {
               $image.show();
               $videoElement.hide();
-            } else {
-              $videoElement.show();
-            }
+            } 
+            else  $videoElement.show();
+                         
           }
 
           // Clicking image will play video
@@ -451,22 +452,19 @@ var videoSection = {
             $videoElement.show();
 
             player.play();
-          })
+          });
 
           // Muted
-          if (isMuted) {
-            player.muted = true;
-          }
+          if (isMuted)  player.muted = true;
+          
 
           // Aspect Ratio
-          if (aspectRatio) {
-            player.ratio = aspectRatio;
-          }
+          if (aspectRatio) player.ratio = aspectRatio;
+                     
 
           // Looping
-          if (isLoopingEnabled) {
-            player.loop = true;
-          }
+          if (isLoopingEnabled) player.loop = true;
+                    
 
           // Show Video Controls
           // - video controls get hidden using a css class: '.video-controls-enabled--false'
@@ -477,7 +475,7 @@ var videoSection = {
 
               // Play video
               player.play();
-            })
+            });
           }
 
           player.on('statechange', event => {
@@ -514,14 +512,14 @@ var videoSection = {
             if ($secondaryButton) {
               $secondaryButton.hide();
             }
-          })
+          });
 
           // If video is paused, show play button icon
           player.on('pause', function() {
             if ($playButton.is(':hidden') || $playButton.length == 0) {
               $videoWrapper.addClass('play-button-icon--visible');
             }
-          })
+          });
 
           // If page loads with video paused and no button showing, show icon
           if (!player.playing && $playButton.is(':hidden') || $playButton.length == 0) {
@@ -530,10 +528,10 @@ var videoSection = {
 
           return false;
         }
-      })
-    })
+      });
+    });
   }
-}
+};
 
 /*============================================================================
   Cart
@@ -555,11 +553,12 @@ var cart = {
       });
     }
   }
-}
+};
 
 /*============================================================================
   Product
 ==============================================================================*/
+
 
 selectCallback = function(variant, selector) {
   var evt = document.createEvent("HTMLEvents");
@@ -575,6 +574,9 @@ selectCallback = function(variant, selector) {
   var notifySend = Shopify.translation.notify_email_send;
 
   var notifyUrl = $notifyFormInputs.data('url');
+  
+  var notifyEmailInput;
+  var variantTitle;
 
   // Manually trigger change event so
   // pure JS listeners can receive it
@@ -584,19 +586,19 @@ selectCallback = function(variant, selector) {
   if (variant) {
     if (variant.title != null) {
     // Escape variant titles
-      var variantTitle = variant.title.replace(/"/g,'\&quot;');
+       variantTitle = variant.title.replace(/"/g,'\&quot;');
 
-      var notifyMessage = Shopify.translation.notify_message_first + variantTitle + Shopify.translation.notify_message_last + notifyUrl;
+       notifyMessage = Shopify.translation.notify_message_first + variantTitle + Shopify.translation.notify_message_last + notifyUrl;
     }
   } else {
-    var notifyMessage = Shopify.translation.notify_message_first + Shopify.translation.notify_message_last + notifyUrl;
+      notifyMessage = Shopify.translation.notify_message_first + Shopify.translation.notify_message_last + notifyUrl;
   }
 
   if ($notifyFormInputs.hasClass('customer--true')) {
     var notifyCustomerEmail = "";
-    var notifyEmailInput = '<input type="hidden" class="notify_email" name="contact[email]" id="contact[email]" value="'+ notifyCustomerEmail +'" />'
+    notifyEmailInput = '<input type="hidden" class="notify_email" name="contact[email]" id="contact[email]" value="'+ notifyCustomerEmail +'" />';
   } else {
-    var notifyEmailInput = '<input required type="email" class="notify_email" name="contact[email]" id="contact[email]" placeholder="'+ notifyEmail +'" value="'+ notifyEmailValue +'" />';
+     notifyEmailInput = '<input required type="email" class="notify_email" name="contact[email]" id="contact[email]" placeholder="'+ notifyEmail +'" value="'+ notifyEmailValue +'" />';
   }
   var notifyFormHTML = notifyEmailInput+'<input type="hidden" name="challenge" value="false" /><input type="hidden" name="contact[body]" class="notify_form_message" data-body="'+ notifyMessage +'" value="'+ notifyMessage +'" /><input class="global-button global-button--primary" type="submit" value="'+ notifySend + '" style="margin-bottom:0px" />';
 
@@ -625,7 +627,7 @@ selectCallback = function(variant, selector) {
           $quickShopElement.attr('src', swatchImage);
           $quickShopElement.attr('srcset', swatchImage);
         }
-      })
+      });
     }
   }
 
@@ -756,7 +758,7 @@ selectCallback = function(variant, selector) {
 
 var productPage = {
   init: function(){
-
+		
     // function to check if browser is IE
     var isIE11 = !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
@@ -775,7 +777,7 @@ var productPage = {
           name: 'model-viewer-ui',
           version: '1.0',
         }
-      ], productMedia.setupMedia)
+      ], productMedia.setupMedia);
     }
 
     if($('.js-full-width-product-images').length){
@@ -795,15 +797,17 @@ var productPage = {
 
     if (Shopify.theme_settings.product_form_style == 'swatches'){
       $('body').on('change', '.swatch :radio', function() {
+        var notifyMessage;
+				var notifyForm;
         var optionIndex = $(this).closest('.swatch').attr('data-option-index');
         var optionValue = $(this).val();
         var parentForm = $(this).closest('.product_form form');
 
 
         if (parentForm.siblings('.notify_form').length){
-          var notifyForm = parentForm.siblings('.notify_form');
+           notifyForm = parentForm.siblings('.notify_form');
         } else {
-          var notifyForm = $('.js-notify-form');
+           notifyForm = $('.js-notify-form');
         }
 
         var option1 = parentForm.find('.swatch_options input:checked').eq(0).val();
@@ -811,11 +815,11 @@ var productPage = {
         var option3 = parentForm.find('.swatch_options input:checked').eq(2).val() || '';
 
         if (option1 && option2 && option3){
-          var notifyMessage = option1 + ' / ' + option2 + ' / ' + option3;
+           notifyMessage = option1 + ' / ' + option2 + ' / ' + option3;
         } else if (option1 && option2){
-          var notifyMessage = option1 + ' / ' + option2;
+          notifyMessage = option1 + ' / ' + option2;
         } else {
-          var notifyMessage = option1;
+           notifyMessage = option1;
         }
 
 
@@ -856,12 +860,12 @@ var productPage = {
           $('.js-product-gallery').find('.is-selected a').focus();
         }, 1);
       }
-    })
+    });
 
     $('.js-product_section .product_form_options:not(.product-recommendations .js-product_section .product_form_options)').each(function () {
       // Enable selectCallback if the number of select elements is not equal to the options size data
       if ($(this).find('.selector-wrapper select').length != $(this).data('options-size')) {
-        new Shopify.OptionSelectors($(this).data('select-id'), { product: $(this).data('product'), onVariantSelected: selectCallback, enableHistoryState: $(this).data('enable-state') });
+        Shopify.OptionSelectors($(this).data('select-id'), { product: $(this).data('product'), onVariantSelected: selectCallback, enableHistoryState: $(this).data('enable-state') });
       }
     });
 
@@ -920,14 +924,14 @@ var productPage = {
             videoID = $(slide).find('[data-plyr-video-id]').data('plyr-video-id');
 
             if(videoPlayers) {
-              for (var i = 0; i < videoPlayers.length; i++) {
+              for ( i = 0; i < videoPlayers.length; i++) {
                 if (videoPlayers[i].id == videoID || videoPlayers[i].media.id == videoID) {
 
                   if(!$(slide).hasClass('is-selected')) {
                     videoPlayers[i].keyboard = {
                       focused: false,
                       global: false
-                    }
+                    };
                   }
                 }
               }
@@ -938,14 +942,14 @@ var productPage = {
             videoID = $(slide).find('[data-plyr-video-id]').data('plyr-video-id');
 
             if(videoPlayers) {
-              for (var i = 0; i < videoPlayers.length; i++) {
+              for ( i = 0; i < videoPlayers.length; i++) {
                 if (videoPlayers[i].id == videoID || videoPlayers[i].media.id == videoID) {
 
                   if(!$(slide).hasClass('is-selected')) {
                     videoPlayers[i].keyboard = {
                       focused: false,
                       global: false
-                    }
+                    };
                   }
                 }
               }
@@ -956,10 +960,10 @@ var productPage = {
               if(mediaType == 'model' && isScreenSizeLarge()) {
                 $(slide).on('mouseenter', function() {
                   $productGallery.flickity('unbindDrag');
-                })
+                });
                 $(slide).on('mouseleave', function() {
                   $productGallery.flickity('bindDrag');
-                })
+                });
               }
             }
             break;
@@ -973,7 +977,7 @@ var productPage = {
 
       $.each(videoPlayers, function(index, player) {
         player.loop = loopingEnabled;
-      })
+      });
     });
 
     $productGallery.on('change.flickity', function() {
@@ -1011,11 +1015,11 @@ var productPage = {
               // Listen for model pause/play events
               $(slide).find('model-viewer').on('shopify_model_viewer_ui_toggle_play', function(){
                 $productGallery.flickity('unbindDrag');
-              })
+              });
 
               $(slide).find('model-viewer').on('shopify_model_viewer_ui_toggle_pause', function(){
                 $productGallery.flickity('bindDrag');
-              })
+              });
               break;
             default:
               $productGallery.flickity('bindDrag');
@@ -1039,7 +1043,7 @@ var productPage = {
             case 'model':
               $.each(productMedia.models, function(index, model) {
                 model.pause();
-              })
+              });
           }
         }
       });
@@ -1066,12 +1070,12 @@ var productPage = {
       // When controls are hidden, height should be auto
       player.on('controlshidden', function(event) {
         $productGallery.find('.flickity-prev-next-button').css('height', 'auto');
-      })
+      });
       // When controls are shown, height should account for controls bar
       player.on('controlsshown', function(event) {
         $productGallery.find('.flickity-prev-next-button').css('height', 'calc(100% - 64px)');
-      })
-    })
+      });
+    });
 
     // Checks for videos and plays them if they are the featured media
     // Autoplay logic only happens on desktop, autoplay set to off for mobile
@@ -1098,22 +1102,22 @@ var productPage = {
             var sortedModels = [];
             $.each(productMedia.models, function(index, model) {
               if($(model.container).closest('.gallery-cell').data('product-id') == pId) {
-                sortedModels.push(model)
+                sortedModels.push(model);
               }
-            })
+            });
 
             $.each(sortedModels, function(index, model) {
               var $slide = $(model.container).closest('.gallery-cell');
               if($slide.hasClass('is-selected')) {
                 model.play();
               }
-            })
+            });
           }
           $productGallery.off('settle.flickity');
         });
 
         return false;
-      })
+      });
 
       $thumbnails.on('click', function(event) {
         var index = $( event.currentTarget ).index();
@@ -1136,21 +1140,20 @@ var productPage = {
             var sortedModels = [];
             $.each(productMedia.models, function(index, model) {
               if($(model.container).closest('.gallery-cell').data('product-id') == pId) {
-                sortedModels.push(model)
+                sortedModels.push(model);
               }
-            })
-
+            });
             $.each(sortedModels, function(index, model) {
               var $slide = $(model.container).closest('.gallery-cell');
               if($slide.hasClass('is-selected')) {
                 model.play();
               }
-            })
+            });
           }
           $productGallery.off('settle.flickity');
         });
         return false;
-      })
+      });
 
       $thumbnails.keypress(function(event) {
         var index = $( event.currentTarget ).index();
@@ -1182,21 +1185,21 @@ var productPage = {
             var sortedModels = [];
             $.each(productMedia.models, function(index, model) {
               if($(model.container).closest('.gallery-cell').data('product-id') == pId) {
-                sortedModels.push(model)
+                sortedModels.push(model);
               }
-            })
+            });
 
             $.each(sortedModels, function(index, model) {
               var $slide = $(model.container).closest('.gallery-cell');
               if($slide.hasClass('is-selected')) {
                 model.play();
               }
-            })
+            });
           }
 
           return false;
         }
-      })
+      });
     }
 
     function checkForVideos() {
@@ -1218,7 +1221,7 @@ var productPage = {
             autoplayYoutubeVideo(iframeID, $slide);
           }
         }
-      })
+      });
     }
 
     function autoplayVideo(videoID, $slide) {
@@ -1231,9 +1234,9 @@ var productPage = {
           // On fullscreen toggle, focus back on the slide itself
           player.on('exitfullscreen', function(){
             $slide.closest('.product-gallery').find('.product-gallery__thumbnails').focus();
-          })
+          });
         }
-      })
+      });
     }
 
     function autoplayYoutubeVideo(iframeID, $slide) {
@@ -1250,9 +1253,9 @@ var productPage = {
           // On fullscreen toggle, focus back on the slide itself
           player.on('exitfullscreen', function(){
             $slide.closest('.product-gallery').find('.product-gallery__thumbnails').focus();
-          })
+          });
         }
-      })
+      });
     }
 
     // Thumbnail gallery logic begins
@@ -1310,9 +1313,9 @@ var productPage = {
               if ($thumbnail.hasClass('is-selected')) {
                 $thumbnail.on('focus', function() {
                   $thumbnailProductGallery.flickity('selectCell', index);
-                })
+                });
               }
-            })
+            });
         }
       } else {
         // If not on desktop, create standard thumbnail slider
@@ -1332,7 +1335,7 @@ var productPage = {
       $thumbnailProductGallery.find('.product-gallery__thumbnail').on('click', function(){
         var index = $(this).index();
         $productGallery.flickity( 'selectCell', index );
-      })
+      });
     }
 
     $(window).on('load', function() {
@@ -1403,7 +1406,7 @@ var productPage = {
         // Re-link inline quickshop
         if (Shopify.theme_settings.quick_shop_style == 'inline') {
           $('[data-product-recommendations-container] .js-product_section .product_form_options').each(function () {
-            new Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
+             Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
           });
         }
 
@@ -1453,11 +1456,11 @@ var productPage = {
           // Re-link swatches on inline quick-shop
           if (sectionEnabled) {
             $('[data-product-recommendations-container] .js-product_section .product_form_options').each(function () {
-              new Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
+              Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
             });
           } else {
             $productRecommendations.find('.js-product_section .product_form_options').each(function () {
-              new Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
+               Shopify.OptionSelectors($(this).data("select-id"), { product: $(this).data("product"), onVariantSelected: selectCallback, enableHistoryState: $(this).data("enable-state") });
             });
           }
 
@@ -1530,7 +1533,7 @@ var productPage = {
           if (swatchOptions.length > 1){
             Shopify.linkOptionSelectors(JSONData, productSection);
           }
-        })
+        });
       }
     }
   },
@@ -1623,7 +1626,7 @@ var productPage = {
             if(val > valMin) $input.val(val - 1);
             if($this.parents(".cart_item").length) {
               if (val - 1 == 0) {
-                $this.closest('.cart_item').addClass('animated fadeOutUp')
+                $this.closest('.cart_item').addClass('animated fadeOutUp');
               }
             }
         }
@@ -1636,7 +1639,7 @@ var productPage = {
     $slider.flickity('destroy');
     $('body').off('click', '.js-change-quantity');
   }
-}
+};
 
 /*============================================================================
   Header
@@ -1666,19 +1669,20 @@ var header = {
     };
 
     var closeAllSubSubmenus = function() {
+      var $openDropdownOnClick;
       $('.vertical-menu_sub-submenu').removeClass('is-visible');
       $('.vertical-menu_sub-submenu').prev('a').attr('data-click-count', 0);
-    }
+    };
 
     var closeAllSubmenus = function() {
       $('.vertical-menu_submenu').removeClass('is-visible');
       $('.vertical-menu_submenu').prev('a').attr('data-click-count', 0);
       $('.mega-menu-parent').attr('data-click-count', 0);
       closeAllSubSubmenus();
-    }
+    };
 
     // Store link items with data attribute of 'data-show-dropdown-on-click' in a variable
-    var $openDropdownOnClick = $('.main-nav__wrapper').find('[data-show-dropdown-on-click]');
+     $openDropdownOnClick = $('.main-nav__wrapper').find('[data-show-dropdown-on-click]');
 
     //Vertical menu enabled
     if ($('.dropdown_link--vertical').length){
@@ -1711,8 +1715,8 @@ var header = {
             $dropdownVertical.removeClass('hidden');
             $dropdownVerticalSubMenu.removeClass('hidden');
             $dropdownVertical.addClass('is-visible');
-            $dropdownVerticalSubMenu.addClass('is-visible')
-          }
+            $dropdownVerticalSubMenu.addClass('is-visible');
+          };
 
           if(e.type == "touchstart") {
             clicked = true;
@@ -1903,10 +1907,12 @@ var header = {
       $('.dropdown_link').attr('data-no-instant', true);
 
       $('body').on('click', '.dropdown_link, .vertical--dropdown', function(e) {
+        var $openDropdownOnClick;
+        var $dropdown;
         $('.nav a').removeClass('active_link');
 
         if ($('#header').is(':visible')) {
-          var $dropdown = $(this).parents("#header").find('[data-dropdown="' + $(this).data("dropdown-rel") + '"]')
+           $dropdown = $(this).parents("#header").find('[data-dropdown="' + $(this).data("dropdown-rel") + '"]');
 
             if(!$(this).hasClass('mini_cart')) {
               $('.cart-container').removeClass('active_link');
@@ -1919,7 +1925,7 @@ var header = {
             return false;
           }
 
-          var $dropdown = $(this).parents('.main-nav').find('[data-dropdown="' + $(this).data('dropdown-rel') + '"]')
+          $dropdown = $(this).parents('.main-nav').find('[data-dropdown="' + $(this).data('dropdown-rel') + '"]');
         }
 
         if ($dropdown.is(':visible') || $dropdown.attr('class') === undefined) {
@@ -1947,6 +1953,7 @@ var header = {
 
       //Toggle mini-cart with menu icon
       if(Shopify.theme_settings.cart_action != 'redirect_cart') {
+        
         $(".mini_cart").on("click", function(e) {
           var $cart_container = $(this).parent();
           if($cart_container.hasClass('active_link')) {
@@ -1965,10 +1972,10 @@ var header = {
 
       $('.cart_content__continue-shopping').on('click', function(e){
         closeMiniCart();
-      })
+      });
 
     } else {
-      var $openDropdownOnClick = $('.main-nav__wrapper').find('[data-show-dropdown-on-click]');
+       $openDropdownOnClick = $('.main-nav__wrapper').find('[data-show-dropdown-on-click]');
       //Enable touch on parent link if on touch device and desktop menu is visible
       if($openDropdownOnClick.length || is_touch_device()){
         $('.dropdown_link').attr('data-click-count', 0);
@@ -2073,7 +2080,7 @@ var header = {
       }
       $.each( dataAttrsToDelete, function( index, attrName ) {
         $target.removeAttr( attrName );
-      })
+      });
     }
   },
   loadMegaMenu: function(){
@@ -2118,7 +2125,7 @@ var header = {
       $('.dropdown_link--vertical:not(.mega-menu-parent)').each(function(index){
         var megaMenuValue = $(this).data('dropdown-rel');
         $('[data-dropdown="' + megaMenuValue + '"]').remove();
-      })
+      });
     }
     var $openDropdownOnClick = $('.main-nav__wrapper').find('[data-show-dropdown-on-click]');
 
@@ -2175,7 +2182,7 @@ var header = {
     $('body').off('click', '.banner a[href^="#"]');
     $('.main-nav__wrapper.sticky_nav').remove();
   }
-}
+};
 
 /*============================================================================
   Map
@@ -2234,13 +2241,15 @@ var mapFunction = {
     var styleJson = [];
     //Set style JSON
     if(mapArray.mapstyle=='aubergine'){
-      styleJson=[{elementType:'geometry',stylers:[{color:'#1d2c4d'}]},{elementType:'labels.text.fill',stylers:[{color:'#8ec3b9'}]},{elementType:'labels.text.stroke',stylers:[{color:'#1a3646'}]},{featureType:'administrative.country',elementType:'geometry.stroke',stylers:[{color:'#4b6878'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#64779e'}]},{featureType:'administrative.province',elementType:'geometry.stroke',stylers:[{color:'#4b6878'}]},{featureType:'landscape.man_made',elementType:'geometry.stroke',stylers:[{color:'#334e87'}]},{featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#023e58'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#283d6a'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#6f9ba5'}]},{featureType:'poi',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'poi.park',elementType:'geometry.fill',stylers:[{color:'#023e58'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#3C7680'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#304a7d'}]},{featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#98a5be'}]},{featureType:'road',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#2c6675'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#255763'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#b0d5ce'}]},{featureType:'road.highway',elementType:'labels.text.stroke',stylers:[{color:'#023e58'}]},{featureType:'transit',elementType:'labels.text.fill',stylers:[{color:'#98a5be'}]},{featureType:'transit',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'transit.line',elementType:'geometry.fill',stylers:[{color:'#283d6a'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#3a4762'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#0e1626'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#4e6d70'}]}]
+      styleJson=[{elementType:'geometry',stylers:[{color:'#1d2c4d'}]},{elementType:'labels.text.fill',stylers:[{color:'#8ec3b9'}]},{elementType:'labels.text.stroke',stylers:[{color:'#1a3646'}]},{featureType:'administrative.country',elementType:'geometry.stroke',stylers:[{color:'#4b6878'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#64779e'}]},{featureType:'administrative.province',elementType:'geometry.stroke',stylers:[{color:'#4b6878'}]},{featureType:'landscape.man_made',elementType:'geometry.stroke',stylers:[{color:'#334e87'}]},{featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#023e58'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#283d6a'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#6f9ba5'}]},{featureType:'poi',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'poi.park',elementType:'geometry.fill',stylers:[{color:'#023e58'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#3C7680'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#304a7d'}]},{featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#98a5be'}]},{featureType:'road',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#2c6675'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#255763'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#b0d5ce'}]},{featureType:'road.highway',elementType:'labels.text.stroke',stylers:[{color:'#023e58'}]},{featureType:'transit',elementType:'labels.text.fill',stylers:[{color:'#98a5be'}]},{featureType:'transit',elementType:'labels.text.stroke',stylers:[{color:'#1d2c4d'}]},{featureType:'transit.line',elementType:'geometry.fill',stylers:[{color:'#283d6a'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#3a4762'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#0e1626'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#4e6d70'}]}];
     }else if(mapArray.mapstyle=='retro'){
-      styleJson=[{elementType:'geometry',stylers:[{color:'#ebe3cd'}]},{elementType:'labels.text.fill',stylers:[{color:'#523735'}]},{elementType:'labels.text.stroke',stylers:[{color:'#f5f1e6'}]},{featureType:'administrative',elementType:'geometry.stroke',stylers:[{color:'#c9b2a6'}]},{featureType:'administrative.land_parcel',elementType:'geometry.stroke',stylers:[{color:'#dcd2be'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#ae9e90'}]},{featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#93817c'}]},{featureType:'poi.park',elementType:'geometry.fill',stylers:[{color:'#a5b076'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#447530'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#f5f1e6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fdfcf8'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#f8c967'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#e9bc62'}]},{featureType:'road.highway.controlled_access',elementType:'geometry',stylers:[{color:'#e98d58'}]},{featureType:'road.highway.controlled_access',elementType:'geometry.stroke',stylers:[{color:'#db8555'}]},{featureType:'road.local',elementType:'labels.text.fill',stylers:[{color:'#806b63'}]},{featureType:'transit.line',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'transit.line',elementType:'labels.text.fill',stylers:[{color:'#8f7d77'}]},{featureType:'transit.line',elementType:'labels.text.stroke',stylers:[{color:'#ebe3cd'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'water',elementType:'geometry.fill',stylers:[{color:'#b9d3c2'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#92998d'}]}]
+      styleJson=[{elementType:'geometry',stylers:[{color:'#ebe3cd'}]},{elementType:'labels.text.fill',stylers:[{color:'#523735'}]},{elementType:'labels.text.stroke',stylers:[{color:'#f5f1e6'}]},{featureType:'administrative',elementType:'geometry.stroke',stylers:[{color:'#c9b2a6'}]},{featureType:'administrative.land_parcel',elementType:'geometry.stroke',stylers:[{color:'#dcd2be'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#ae9e90'}]},{featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#93817c'}]},{featureType:'poi.park',elementType:'geometry.fill',stylers:[{color:'#a5b076'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#447530'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#f5f1e6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fdfcf8'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#f8c967'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#e9bc62'}]},{featureType:'road.highway.controlled_access',elementType:'geometry',stylers:[{color:'#e98d58'}]},{featureType:'road.highway.controlled_access',elementType:'geometry.stroke',stylers:[{color:'#db8555'}]},{featureType:'road.local',elementType:'labels.text.fill',stylers:[{color:'#806b63'}]},{featureType:'transit.line',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'transit.line',elementType:'labels.text.fill',stylers:[{color:'#8f7d77'}]},{featureType:'transit.line',elementType:'labels.text.stroke',stylers:[{color:'#ebe3cd'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#dfd2ae'}]},{featureType:'water',elementType:'geometry.fill',stylers:[{color:'#b9d3c2'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#92998d'}]}];
     }else if(mapArray.mapstyle=='silver'){
-      styleJson=[{elementType:'geometry',stylers:[{color:'#f5f5f5'}]},{elementType:'labels.icon',stylers:[{visibility:'off'}]},{elementType:'labels.text.fill',stylers:[{color:'#616161'}]},{elementType:'labels.text.stroke',stylers:[{color:'#f5f5f5'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#bdbdbd'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#eeeeee'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#757575'}]},{featureType:'poi.park',elementType:'geometry',stylers:[{color:'#e5e5e5'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#ffffff'}]},{featureType:'road.arterial',elementType:'labels.text.fill',stylers:[{color:'#757575'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#dadada'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#616161'}]},{featureType:'road.local',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]},{featureType:'transit.line',elementType:'geometry',stylers:[{color:'#e5e5e5'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#eeeeee'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#c9c9c9'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]}]
+      styleJson=[{elementType:'geometry',stylers:[{color:'#f5f5f5'}]},{elementType:'labels.icon',stylers:[{visibility:'off'}]},{elementType:'labels.text.fill',stylers:[{color:'#616161'}]},{elementType:'labels.text.stroke',stylers:[{color:'#f5f5f5'}]},{featureType:'administrative.land_parcel',elementType:'labels.text.fill',stylers:[{color:'#bdbdbd'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#eeeeee'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#757575'}]},{featureType:'poi.park',elementType:'geometry',stylers:[{color:'#e5e5e5'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#ffffff'}]},{featureType:'road.arterial',elementType:'labels.text.fill',stylers:[{color:'#757575'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#dadada'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#616161'}]},{featureType:'road.local',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]},{featureType:'transit.line',elementType:'geometry',stylers:[{color:'#e5e5e5'}]},{featureType:'transit.station',elementType:'geometry',stylers:[{color:'#eeeeee'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#c9c9c9'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#9e9e9e'}]}];
     }else if(mapArray.mapstyle=='night'){
-      styleJson=[{elementType:'geometry',stylers:[{color:'#242f3e'}]},{elementType:'labels.text.fill',stylers:[{color:'#746855'}]},{elementType:'labels.text.stroke',stylers:[{color:'#242f3e'}]},{featureType:'administrative.locality',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi.park',elementType:'geometry',stylers:[{color:'#263c3f'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#6b9a76'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#38414e'}]},{featureType:'road',elementType:'geometry.stroke',stylers:[{color:'#212a37'}]},{featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#9ca5b3'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#746855'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#1f2835'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#f3d19c'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#2f3948'}]},{featureType:'transit.station',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#17263c'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#515c6d'}]},{featureType:'water',elementType:'labels.text.stroke',stylers:[{color:'#17263c'}]}]}else{styleJson=[]}
+      styleJson=[{elementType:'geometry',stylers:[{color:'#242f3e'}]},{elementType:'labels.text.fill',stylers:[{color:'#746855'}]},{elementType:'labels.text.stroke',stylers:[{color:'#242f3e'}]},{featureType:'administrative.locality',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi.park',elementType:'geometry',stylers:[{color:'#263c3f'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#6b9a76'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#38414e'}]},{featureType:'road',elementType:'geometry.stroke',stylers:[{color:'#212a37'}]},{featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#9ca5b3'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#746855'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#1f2835'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#f3d19c'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#2f3948'}]},{featureType:'transit.station',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#17263c'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#515c6d'}]},{featureType:'water',elementType:'labels.text.stroke',stylers:[{color:'#17263c'}]}];
+    }
+      else{styleJson=[];}
     //Create google maps link
     $('.js-map-link').attr(
       'href',
@@ -2393,3 +2402,4 @@ class ProductCTA extends HTMLElement {
 }
 
 customElements.define(ProductCTA.shortcode, ProductCTA);
+
